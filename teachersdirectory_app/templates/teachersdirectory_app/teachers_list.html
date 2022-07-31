@@ -1,0 +1,59 @@
+{%extends "teachersdirectory_app/dashboard_base.html"%}
+{% load static %}
+{% block static %}
+    <script src="{% static 'search_data.js' %}" defer></script>
+{% endblock %}
+{% block content %}
+<form id="search-form" autocomplete="off">
+    {% csrf_token %}
+    <input type="text" id="search-text" class="p-1 w-20 mt-3" placeholder="Search with Last name">
+    <div id="result-box" class="not-visible " style="background: gray"></div>
+</form>
+<div class="table-app-list">
+    <table class="table mt-4">
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Room No</th>
+        <th>Subjects</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if data_list %}
+    {% for data in data_list %}
+    <tr>
+        <td>{{data.firstname}}</td>
+        <td>{{ data.lastname }}</td>
+        <td>{{ data.email}}</td>
+        <td>{{ data.phone }}</td>
+        <td>{{ data.roomno }}</td>
+        <td>{{ data.subjects }}</td>
+        <td><a href="{% url 'view_profile' data.id%}">View</a></td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+</table>
+</div>
+
+<div class="table-search-output">
+    <table class="table mt-4">
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Room No</th>
+        <th>Subjects</th>
+    </tr>
+    </thead>
+    <tbody class="table-body">
+    </tbody>
+</table>
+</div>
+
+{% endblock %}

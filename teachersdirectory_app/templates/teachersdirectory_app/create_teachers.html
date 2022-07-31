@@ -1,0 +1,14 @@
+{%extends "teachersdirectory_app/dashboard_base.html"%}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data" class="mt-3" id="form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
+{% if messages %}
+{% for message in messages %}
+<p style="color:red;">{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% endblock %}
